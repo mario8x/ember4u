@@ -1,0 +1,17 @@
+{
+  "name": "my-project",
+  "description": "Small description for my-project goes here",
+  "main": "",
+  "authors": [
+    "mario8x <quangxnguyen@kms-technology.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mario8x/ember4u",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

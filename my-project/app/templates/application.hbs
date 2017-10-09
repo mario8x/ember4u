@@ -1,5 +1,12 @@
 {{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
+<!-- {{welcome-page}} -->
 {{!-- Feel free to remove this! --}}
+<h2 id="title">Welcome to Ember </h2>
+{{#link-to 'students' replace=true}} Students {{/link-to}} <br>
 
+{{#each model as |student|}}
+  {{#link-to 'students' student}} {{student.name}} {{/link-to}} <br>
+{{/each}}
+<br>
+{{hello-world}}
 {{outlet}}

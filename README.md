@@ -1,6 +1,141 @@
 # ember2beginer
 
 ## Tasks
+### Oct 09t, 2017
+
+Ember Template
+
+* Create new route to add new template
+
+* working with html links inside templates
+
+```
+ember g route students
+```
+* binding with element attribute and classes
+
+```
+ember g template index
+ember g controller index
+
+controller.js:
+export default Ember.Controller.extend({
+  url: 'http:/placehold.it/350x200',
+  sideClass: 'cc',
+  secondClass: 'dd'
+});
+
+template.hbs:
+<img src="{{url}}"/>
+<div id="side" class="{{sideClass}} {{secondClass}}"> Info </div>
+```
+
+* use each helper to display list of items
+
+```
+ember g controller student
+ember g resource student
+
+./student/template.hbs
+
+{{#each students as |student|}}
+  {{student.name}} <br>
+{{/each}}
+
+{{#each emptyArray as |itme|}}
+  {{item}}
+{{else}}
+  Empty Array
+{{/each}}
+
+<br>
+{{#each students as |student index|}}
+  Student {{student.name}} is at index {{index}} <br>
+{{/each}}
+
+http://localhost:4200/student
+```
+
+* generating a controller, component
+
+```
+ember g controller comment
+ember g component hello-world
+```
+
+Enumerable with Arrays
+* Iterating over an array with forEach
+
+```
+let food = ['Poi', 'Ono', 'Adobo Chicken'];
+
+food.forEach((item, index) => {
+  console.log(`Menu Item ${index+1}: ${item}`);
+});
+```
+
+* using map and mapBy with an array
+
+```
+-map
+let words = ['goodbye', 'cruel', 'world'];
+
+let emphaticWords = words.map(item => `${item}!`);
+//=> ["goodbye!", "cruel!", "world!"]
+-mapBy
+let hawaii = Ember.Object.create({
+  capital: 'Honolulu'
+});
+
+let california = Ember.Object.create({
+  capital: 'Sacramento'
+});
+
+let states = [hawaii, california];
+
+states.mapBy('capital');
+//=> ["Honolulu", "Sacramento"]
+```
+
+* using filterBy with a collection of objects
+```
+Todo = Ember.Object.extend({
+  title: null,
+  isDone: false
+});
+
+let todos = [
+  Todo.create({ title: 'Write code', isDone: true }),
+  Todo.create({ title: 'Go to sleep' })
+];
+
+todos.filterBy('isDone', true);
+
+// returns an Array containing only items with `isDone == true`
+```
+* Creating a common mixin object
+* Mixins with Ember CLI
+
+```
+ember generate mixin common
+/mixins/common.js
+import Ember from 'ember';
+
+export default Ember.Mixin.create({
+  property1: 'This is a mixin property',
+  edit: function() {
+    // console.log('Starting to edit');
+    this.set('isEditing', true);
+  },
+  isEditing: false
+});
+```
+* Working with ember observers
+Adding new observers
+Adding multiple properties to the observer
+Resolving the synchronous issues
+
+* Working with computed properties
 
 ### Oct 08th, 2017
 
