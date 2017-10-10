@@ -1,11 +1,174 @@
 # ember2beginer
+to remove we use destroy instead of generate:
 
+```
+ember destroy resource student
+ember destroy controller student
+```
 ## Tasks
-### Oct 09t, 2017
+
+### Oct 10th, 2017
+Ember router: ( application route, route model, dynamic segments inside routes, routes with template, redirection with route)
+
+* setting up a route model
+mock data: http://www.ember-cli-mirage.com/docs/v0.3.x/quickstart/
+
+```
+dynamic segments and dynamic models:
+to create mock object
+ember install ember-cli-mirage
+ember g resource students
+ember g adapter application
+ember g route application
+
+/app/pods/student/model.js
+
+/mirage/fixtures/sudents.js
+export default {
+  {id: 1, name: 'Jane Smith', age: 15},
+  {id: 2, name: 'Erik Hanchett', age: 14},
+  {id: 3, name: 'Suzy Q', age: 17}
+};
+
+/mirage/scenario/default.js
+server.loadFixtures();
+
+/mirage/config.js
+this.get('/students');
+this.get('/students/:id');
+
+
+multiple models:
+
+route
+
+export default Ember.Route.extend({
+  model() {
+    return RSVP.hash({
+      songs: this.get('store').findAll('song'),
+      albums: this.get('store').findAll('album')
+    });
+  }
+});
+
+song.hbs
+<h1>Playlist</h1>
+
+<ul>
+  {{#each model.songs as |song|}}
+    <li>{{song.name}} by {{song.artist}}</li>
+  {{/each}}
+</ul>
+
+<h1>Albums</h1>
+
+<ul>
+  {{#each model.albums as |album|}}
+    <li>{{album.title}} by {{album.artist}}</li>
+  {{/each}}
+</ul>
+
+
+reuse route context:
+
+```
+* create a route
+
+```
+index route: /
+this.route('index', { path: '/' });
+
+
+ember generate route route-name
+.app/router.js
+Router.map(function() {
+  this.route('about', { path: '/about' });
+  this.route('favorites', { path: '/favs' });
+});
+
+nested route
+ember generate route posts
+ember generate route posts/new
+launch:
+/posts
+/posts/new
+
+dynamic segments: starts with a : and is followed by an identifier.
+this.route('post', { path: '/post/:post_id' });
+
+ex: /post/5
+
+Wildcard / globbing routes
+app/router.js
+Router.map(function() {
+  this.route('not-found', { path: '/*path' });
+});
+
+not-found.hbs
+<p>Oops, the page you're looking for wasn't found</p>
+
+```
+
+Ember template
+* development helpers
+
+```
+/pods/component/log-example/template.hbs
+controller.js
+log
+{{log 'Name is:' name}}
+
+debugger
+{{debugger}}
+in the console:
+> get('item.name')
+> context
+
+```
+### Oct 09th, 2017
 
 Ember Template
 
-* Create new route to add new template
+* use input template helper
+```
+./app/template/application.hbs
+{{input value='Hello world'}} <br>
+{{input value=helloText}}<br>
+{{input value=helloText key-press='pressed'}}<br>
+{{input type='checkbox' checked=isChecked}} <br>
+{{textarea value='hello world' cols='20' rows='10'}}
+
+```
+* to prevent user click on links/
+
+```
+<a href="thispage.htm" {{action 'pressed' preventDefault=true}}> Press Me </a>
+```
+
+* handling html actions
+
+```
+create component
+ember g component action-component
+
+./action-component/component.js
+export default Ember.Component.extend({
+  showText: true,
+  actions: {
+    toggleText() {
+      this.toggleProperty('showText');
+    }
+  }
+});
+./action-component/template.hbs
+{{#if showText}}
+Show test display here
+{{/if}} <br>
+<button {{action 'toggleText'}}> {{if showText 'Hide Text' 'Show text'}} </button>
+{{yield}}
+./app/template/application.hbs
+{{action-component}}
+```
 
 * working with html links inside templates
 

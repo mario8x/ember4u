@@ -1,1 +1,7 @@
 {{outlet}}
+
+{{#each model as |student|}}
+name: {{student.name}} <br>
+age: {{student.age}} <br>
+{{/each}}
+{{log model}}

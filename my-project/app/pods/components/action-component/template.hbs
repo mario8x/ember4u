@@ -1,0 +1,5 @@
+{{#if showText}}
+Show test display here
+{{/if}} <br>
+<button {{action 'toggleText'}}> {{if showText 'Hide Text' 'Show text'}} </button>
+{{yield}}

@@ -2,11 +2,27 @@
 <!-- {{welcome-page}} -->
 {{!-- Feel free to remove this! --}}
 <h2 id="title">Welcome to Ember </h2>
+<h3> Ember template</h3>
+
+<br>
+{{action-component}}
+{{hello-world}} <br>
+<a href="thispage.htm" {{action 'pressed' preventDefault=true}}> Press Me </a>
+
+<h4>Input temaplate helper </h4>
+{{input value='Hello world'}} <br>
+{{input value=helloText}}<br>
+{{input value=helloText key-press='pressed'}}<br>
+{{input type='checkbox' checked=isChecked}} <br>
+{{textarea value='hello world' cols='20' rows='10'}}
+
+
+<h4>developer helpers </h4>
+{{log-example}}
+
+<h3> Ember route</h3>
+
+{{#link-to 'about'}} About me {{/link-to}}<br>
 {{#link-to 'students' replace=true}} Students {{/link-to}} <br>
 
-{{#each model as |student|}}
-  {{#link-to 'students' student}} {{student.name}} {{/link-to}} <br>
-{{/each}}
-<br>
-{{hello-world}}
 {{outlet}}
